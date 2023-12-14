@@ -1,4 +1,3 @@
-import Cell from "./ui/atoms/Cell";
 import {
   Flex,
   Text,
@@ -6,11 +5,16 @@ import {
   Container,
   Heading,
   Section,
-  Grid,
 } from "@radix-ui/themes";
+import Chessboard from "./components/Chessboard";
+import { useState } from "react";
 
 function App() {
-  const cells = new Array(8).fill("+");
+  const [flip, setFlip] = useState(false);
+
+  const toggleFlip = () => {
+    setFlip((prev) => !prev);
+  };
   return (
     <Container size="2">
       <Flex my={"5"} gap="2" justify={"center"} align={"baseline"}>
@@ -19,11 +23,7 @@ function App() {
           ChessNut
         </Heading>
       </Flex>
-      <Flex direction="column" gap="2">
-        <Text size="3">Welcome to ChessNut App : {cells.length})</Text>
-        <Button>Let's go</Button>
-      </Flex>
-      <Section my={"9"} size="2">
+      <Section mt={"5"} mb={"1"} size="2">
         <Flex
           direction={"column"}
           gap={1}
@@ -35,17 +35,18 @@ function App() {
             overflow: "hidden",
           }}
         >
-          <Grid
-            columns="8"
-            width="auto"
-            style={{ borderRadius: "3px", overflow: "hidden" }}
-          >
-            {cells.map((ele, i) =>
-              cells.map((cell, j) => <Cell dark={(i + j) % 2} />)
-            )}
-          </Grid>
+          <Chessboard flip={flip} />
         </Flex>
       </Section>
+      <Flex direction="column" gap="2">
+        <Button
+          onClick={() => {
+            toggleFlip();
+          }}
+        >
+          Flip Board
+        </Button>
+      </Flex>
     </Container>
   );
 }
