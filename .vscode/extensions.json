@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "dsznajder.es7-react-js-snippets",
+        "formulahendry.auto-complete-tag",
+        "naumovs.color-highlight",
+        "oderwat.indent-rainbow",
+        "ms-vscode.vscode-typescript-next",
+        "christian-kohler.path-intellisense",
+        "meganrogge.template-string-converter",
+        "britesnow.vscode-toggle-quotes"
+    ]
+}
