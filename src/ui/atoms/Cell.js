@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from "@radix-ui/themes";
-import blackBishop from "../../assets/pieces/bB.svg";
+import { pieceCodeImageMapping } from "../../chess/pieces";
 
 const cellColorMap = {
   light: "beige",
@@ -31,7 +31,11 @@ const Cell = ({ color = "light", piece, square, showRank, showFile }) => {
       )}
       <Flex p={"2"} style={{ zIndex: 10 }}>
         {piece && (
-          <img style={{ width: "100%" }} src={blackBishop} alt="piece" />
+          <img
+            style={{ width: "100%" }}
+            src={pieceCodeImageMapping[piece]}
+            alt="piece"
+          />
         )}
       </Flex>
     </Box>

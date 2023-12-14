@@ -6,12 +6,13 @@ import {
 } from "../chess/utils";
 import { Flex } from "@radix-ui/themes";
 import Cell from "../ui/atoms/Cell";
+import { initialPos } from "../chess/pieces";
 
 const Chessboard = ({ flip }) => {
   const [board, setBoard] = useState(emptyBoard);
 
-  const setPieceAt = (square, piece) => {
-    const [i, j] = getIndicesFromSquareNotation(square);
+  const setPieceAt = ({ square, piece, posArray }) => {
+    const [i, j] = square ? getIndicesFromSquareNotation(square) : posArray;
     setBoard((existingBoard) => {
       const updatedBoard = updateValueIn2D(existingBoard, i, j, {
         ...existingBoard[i][j],
@@ -22,8 +23,14 @@ const Chessboard = ({ flip }) => {
   };
 
   useEffect(() => {
-    setPieceAt("b6", "bB");
+    initialPos.forEach((row, i) => {
+      row.forEach((element, j) => {
+        const piece = initialPos[i][j];
+        setPieceAt({ posArray: [i, j], piece });
+      });
+    });
   }, []);
+
   return (
     <Flex
       direction={flip ? "column" : "column-reverse"}
